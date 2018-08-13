@@ -4,9 +4,9 @@ function find(question) {
     var data = {"question" : question};
 
     $.ajax({
-        type: "POST",
-        url: URL,
-        data: data,
+        type: "GET",
+        url: URL + "?question=" + question,
+        //data: data,
         success: success,
         error: error,
         dataType: "json"
