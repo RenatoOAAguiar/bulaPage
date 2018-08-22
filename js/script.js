@@ -4,14 +4,24 @@ function find(question) {
     var data = {"question" : question};
 
     $.ajax({
-        type: "POST",
-        url: URL,
-        data: data,
+        type: "GET",
+        url: URL + "?question=" + question,
+        //data: data,
         success: success,
         error: error,
         dataType: "json"
     });
 }
+
+$(document).ready(function() {
+	$('#txtPergunta').focus();
+});
+
+$(document).keypress(function(e) {
+    if(e.which == 13) {
+        send();
+    }
+});
 
 function error(jqXHR, exception){
     console.log("Status: " + jqXHR.status);
@@ -29,11 +39,15 @@ function success(data) {
 }
 
 $('#btnEnviar').on('click', function(){
+    send();
+});
+
+function send(){
     var question = $('#txtPergunta').val();
     if(question != '' && question != undefined){
         find(question);
     }
-});
+}
 
 $('#btnLimpar').on('click', function(){	
     $('#txtResposta' ).empty();
