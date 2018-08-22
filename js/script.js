@@ -13,6 +13,16 @@ function find(question) {
     });
 }
 
+$(document).ready(function() {
+	$('#txtPergunta').focus();
+});
+
+$(document).keypress(function(e) {
+    if(e.which == 13) {
+        send();
+    }
+});
+
 function error(jqXHR, exception){
     console.log("Status: " + jqXHR.status);
     console.log("Message: " + jqXHR.responseText);
@@ -29,11 +39,15 @@ function success(data) {
 }
 
 $('#btnEnviar').on('click', function(){
+    send();
+});
+
+function send(){
     var question = $('#txtPergunta').val();
     if(question != '' && question != undefined){
         find(question);
     }
-});
+}
 
 $('#btnLimpar').on('click', function(){	
     $('#txtResposta' ).empty();
